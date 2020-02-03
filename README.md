@@ -13,7 +13,7 @@ step 1:
 step 2:
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.1'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.2'
 	}
 
 step 3:
