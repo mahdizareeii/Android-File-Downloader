@@ -29,11 +29,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void download() {
-        String dir = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //url of file
+        String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
-        FileDownloader fileDownloader = new FileDownloader(
-                "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-                dir + "/hello.jpg");
+        //direction of downloadedFile
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello.jpg";
+
+        //get instance of FileDownloader
+        FileDownloader fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
+
+        //download file
         fileDownloader.downloadFile(new OnFileDownloaderListener() {
             @Override
             public void onStart() {
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onProgressUpdate(int progress) {
-                Toast.makeText(MainActivity.this, "" + progress, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "downloading : " + progress, Toast.LENGTH_SHORT).show();
             }
 
             @Override
