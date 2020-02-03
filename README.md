@@ -24,8 +24,8 @@ step 3:
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
 step 4:
-	
-	//url of file
+
+        //url of file
         String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
         //direction of downloadedFile
