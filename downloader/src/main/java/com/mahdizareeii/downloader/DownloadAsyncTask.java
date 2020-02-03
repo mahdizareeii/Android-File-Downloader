@@ -1,4 +1,4 @@
-package com.sample.downlaoder;
+package com.mahdizareeii.downloader;
 
 import android.os.AsyncTask;
 import android.os.Handler;

@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.sample.downlaoder.DownloadState;
-import com.sample.downlaoder.FileDownloader;
-import com.sample.downlaoder.OnFileDownloaderListener;
+import com.mahdizareeii.downloader.DownloadState;
+import com.mahdizareeii.downloader.FileDownloader;
+import com.mahdizareeii.downloader.OnFileDownloaderListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onProgressUpdate(int progress) {
-                Toast.makeText(MainActivity.this, "downloading : " + progress, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Downloading : " + progress, Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.sample.downlaoder;
+package com.mahdizareeii.downloader;
 
 public interface OnFileDownloaderListener {
     public abstract void onStart();
