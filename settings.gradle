@@ -1,2 +1,2 @@
-include ':app', ':downlaoder'
+include ':app', ':downloader'
 rootProject.name='Downloader'
