@@ -1,7 +1,7 @@
 # File-Downloader
 [![](https://jitpack.io/v/mahdizareeii/File-Downloader.svg)](https://jitpack.io/#mahdizareeii/File-Downloader)
 
-step 1:
+step 1: add the following codes in 'build.gradle(Project: yourproject)'
 
 	allprojects {
 		repositories {
@@ -10,20 +10,19 @@ step 1:
 		}
 	}
   
-step 2:
+step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
 	        implementation 'com.github.mahdizareeii:File-Downloader:1.2'
 	}
 
-step 3:
-	add this permissions in your manifest
+step 3: add the permissions in your manifest
 
 	<uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
-step 4:
+step 4: how to use
 
         //url of file
         String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
