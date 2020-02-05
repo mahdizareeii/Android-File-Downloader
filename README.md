@@ -13,7 +13,7 @@ step 1: add the following codes in 'build.gradle(Project: yourproject)'
 step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.2'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.3'
 	}
 
 step 3: add the permissions in your manifest
@@ -34,7 +34,7 @@ step 4: how to use
         FileDownloader fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
 
         //download file
-        fileDownloader.downloadFile(new OnFileDownloaderListener() {
+        fileDownloader.downloadFile(new OnFileDownloadListener() {
             @Override
             public void onStart() {
                 Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
@@ -57,5 +57,13 @@ step 4: how to use
                 } else {
                     Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+	
+	//cancel download file
+        fileDownloader.cancelDownload(new OnFileDownloadCancelListener() {
+            @Override
+            public void onCancel() {
+
             }
         });
