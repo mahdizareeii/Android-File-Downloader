@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,17 +18,17 @@ import java.net.URL;
 public class DownloadAsyncTask extends AsyncTask<String, Integer, String> {
 
     private String fileStorageUrl;
-    private OnFileDownloaderListener onFileDownloaderListener;
+    private OnFileDownloadListener onFileDownloadListener;
 
-    public DownloadAsyncTask(String fileStorageUrl, OnFileDownloaderListener fileDownloader) {
+    public DownloadAsyncTask(String fileStorageUrl, OnFileDownloadListener onFileDownloadListener) {
         this.fileStorageUrl = fileStorageUrl;
-        this.onFileDownloaderListener = fileDownloader;
+        this.onFileDownloadListener = onFileDownloadListener;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        onFileDownloaderListener.onStart();
+        onFileDownloadListener.onStart();
     }
 
     @Override
@@ -95,16 +97,16 @@ public class DownloadAsyncTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        onFileDownloaderListener.onProgressUpdate(values[0]);
+        onFileDownloadListener.onProgressUpdate(values[0]);
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s != null) {
-            onFileDownloaderListener.onDownloaded(new DownloadState(false, s));
+            onFileDownloadListener.onDownloaded(new DownloadState(false, s));
         } else {
-            onFileDownloaderListener.onDownloaded(new DownloadState(true, "Download Successful"));
+            onFileDownloadListener.onDownloaded(new DownloadState(true, "Download Successful"));
         }
     }
 
@@ -113,7 +115,7 @@ public class DownloadAsyncTask extends AsyncTask<String, Integer, String> {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                onFileDownloaderListener.onError(message);
+                onFileDownloadListener.onError(message);
             }
         };
     }

@@ -1,6 +1,8 @@
-package com.mahdizareeii.downloader;
+package com.mahdizareeii.downloader.interfaces;
 
-public interface OnFileDownloaderListener {
+import com.mahdizareeii.downloader.DownloadState;
+
+public interface OnFileDownloadListener {
     public abstract void onStart();
 
     public abstract void onProgressUpdate(int progress);

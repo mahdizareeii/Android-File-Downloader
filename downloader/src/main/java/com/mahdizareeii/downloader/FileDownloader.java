@@ -1,5 +1,8 @@
 package com.mahdizareeii.downloader;
 
+import com.mahdizareeii.downloader.interfaces.OnFileDownloadCancelListener;
+import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
+
 public class FileDownloader {
 
     private DownloadAsyncTask downloadAsyncTask;
@@ -10,12 +13,14 @@ public class FileDownloader {
         this.fileStorageUrl = fileStorageUrl;
     }
 
-    public void downloadFile(OnFileDownloaderListener onFileDownloaderListener) {
-        downloadAsyncTask = new DownloadAsyncTask(fileStorageUrl, onFileDownloaderListener);
+    public void downloadFile(OnFileDownloadListener onFileDownloadListener) {
+        downloadAsyncTask = new DownloadAsyncTask(fileStorageUrl, onFileDownloadListener);
         downloadAsyncTask.execute(fileDownloadUrl);
     }
 
-    public void cancelDownload() {
-        downloadAsyncTask.cancel(true);
+    public void cancelDownload(OnFileDownloadCancelListener onFileDownloadListener) {
+        onFileDownloadListener.onCancel();
+        if (downloadAsyncTask != null)
+            downloadAsyncTask.cancel(true);
     }
 }

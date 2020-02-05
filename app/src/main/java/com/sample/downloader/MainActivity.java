@@ -10,7 +10,8 @@ import android.widget.Toast;
 
 import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.FileDownloader;
-import com.mahdizareeii.downloader.OnFileDownloaderListener;
+import com.mahdizareeii.downloader.interfaces.OnFileDownloadCancelListener;
+import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         FileDownloader fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
 
         //download file
-        fileDownloader.downloadFile(new OnFileDownloaderListener() {
+        fileDownloader.downloadFile(new OnFileDownloadListener() {
             @Override
             public void onStart() {
                 Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
@@ -62,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        //cancel download file
+        fileDownloader.cancelDownload(new OnFileDownloadCancelListener() {
+            @Override
+            public void onCancel() {
+
             }
         });
     }
