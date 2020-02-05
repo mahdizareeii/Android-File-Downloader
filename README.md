@@ -1,5 +1,5 @@
 # File-Downloader
-[![](https://jitpack.io/v/mahdizareeii/File-Downloader.svg)](https://jitpack.io/#mahdizareeii/File-Downloader)
+[![](https://jitpack.io/v/mahdizareeii/Android-File-Downloader.svg)](https://jitpack.io/#mahdizareeii/Android-File-Downloader)
 
 step 1: add the following codes in 'build.gradle(Project: yourproject)'
 
