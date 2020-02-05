@@ -1,10 +1,11 @@
-package com.mahdizareeii.downloader;
+package com.mahdizareeii.downloader.aSyncTasks;
 
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
 
 import java.io.FileOutputStream;
@@ -15,12 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadAsyncTask extends AsyncTask<String, Integer, String> {
+public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> {
 
     private String fileStorageUrl;
     private OnFileDownloadListener onFileDownloadListener;
 
-    public DownloadAsyncTask(String fileStorageUrl, OnFileDownloadListener onFileDownloadListener) {
+    public StreamDownloadAsyncTask(String fileStorageUrl, OnFileDownloadListener onFileDownloadListener) {
         this.fileStorageUrl = fileStorageUrl;
         this.onFileDownloadListener = onFileDownloadListener;
     }

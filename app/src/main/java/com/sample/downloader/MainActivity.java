@@ -1,12 +1,13 @@
 package com.sample.downloader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.FileDownloader;
@@ -15,32 +16,48 @@ import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FileDownloader fileDownloader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.download);
+        Button streamDownload = findViewById(R.id.streamDownload);
+        final Button fullDownload = findViewById(R.id.fullDownload);
+        final Button cancelDownload = findViewById(R.id.cancelDownload);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        streamDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                download();
+                streamDownload();
+            }
+        });
+        fullDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fullDownload();
+            }
+        });
+        cancelDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelDownload();
             }
         });
     }
 
-    private void download() {
+    private void streamDownload() {
         //url of file
-        String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+        String fileDownloadUrl = "https://studioappmaker.ir/MusicStudio/file/music/tamoomezendegimo.wav";
 
         //direction of downloadedFile
-        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello.jpg";
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hellostream.mp3";
 
         //get instance of FileDownloader
-        FileDownloader fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
+        fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
 
         //download file
-        fileDownloader.downloadFile(new OnFileDownloadListener() {
+        fileDownloader.streamDownloadFile(new OnFileDownloadListener() {
             @Override
             public void onStart() {
                 Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
@@ -48,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onProgressUpdate(int progress) {
-                Toast.makeText(MainActivity.this, "Downloading : " + progress, Toast.LENGTH_SHORT).show();
+                Log.i("onProgressUpdate:", "Downloading Stream: " + progress);
             }
 
             @Override
@@ -65,13 +82,64 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        //cancel download file
-        fileDownloader.cancelDownload(new OnFileDownloadCancelListener() {
+    private void fullDownload() {
+        //url of file
+        String fileDownloadUrl = "https://studioappmaker.ir/MusicStudio/file/music/tamoomezendegimo.wav";
+
+        //direction of downloadedFile
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hellofull.mp3";
+
+        //get instance of FileDownloader
+        fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
+
+        //download file
+        fileDownloader.fullDownloadFile(new OnFileDownloadListener() {
             @Override
-            public void onCancel() {
+            public void onStart() {
+                Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onProgressUpdate(int progress) {
+                Log.i("onProgressUpdate:", "Downloading full: " + progress);
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDownloaded(DownloadState downloadState) {
+                if (downloadState.isSuccessfully()) {
+                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
+    private void cancelDownload() {
+
+        //cancel download file
+        if (fileDownloader != null) {
+            fileDownloader.cancelStreamDownload(new OnFileDownloadCancelListener() {
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "Download Stream Canceled", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            fileDownloader.cancelFullDownload(new OnFileDownloadCancelListener() {
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "Download full Canceled", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 }
