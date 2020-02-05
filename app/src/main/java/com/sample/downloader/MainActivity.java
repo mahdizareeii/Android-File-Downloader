@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void streamDownload() {
         //url of file
-        String fileDownloadUrl = "https://studioappmaker.ir/MusicStudio/file/music/tamoomezendegimo.wav";
+        String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
         //direction of downloadedFile
-        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hellostream.mp3";
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello_stream_download.png";
 
         //get instance of FileDownloader
         fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void fullDownload() {
         //url of file
-        String fileDownloadUrl = "https://studioappmaker.ir/MusicStudio/file/music/tamoomezendegimo.wav";
+        String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
         //direction of downloadedFile
-        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hellofull.mp3";
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello_full_download.png";
 
         //get instance of FileDownloader
         fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);

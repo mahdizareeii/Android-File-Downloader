@@ -68,6 +68,7 @@ public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> 
 
                 outputStream.write(data, 0, count);
             }
+            onFileDownloadListener.onDownloaded(new DownloadState(true, "Download Successful"));
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -104,11 +105,6 @@ public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if (s != null) {
-            onFileDownloadListener.onDownloaded(new DownloadState(false, s));
-        } else {
-            onFileDownloadListener.onDownloaded(new DownloadState(true, "Download Successful"));
-        }
     }
 
     private void onError(final String message) {
