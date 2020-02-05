@@ -13,7 +13,7 @@ step 1: add the following codes in 'build.gradle(Project: yourproject)'
 step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.3'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.4'
 	}
 
 step 3: add the permissions in your manifest
@@ -23,18 +23,19 @@ step 3: add the permissions in your manifest
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
 step 4: how to use
-
+	/* this is sample of streaming download */
+	
         //url of file
         String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
         //direction of downloadedFile
-        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello.jpg";
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello_stream_download.png";
 
         //get instance of FileDownloader
-        FileDownloader fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
+        fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
 
         //download file
-        fileDownloader.downloadFile(new OnFileDownloadListener() {
+        fileDownloader.streamDownloadFile(new OnFileDownloadListener() {
             @Override
             public void onStart() {
                 Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
@@ -42,7 +43,7 @@ step 4: how to use
 
             @Override
             public void onProgressUpdate(int progress) {
-                Toast.makeText(MainActivity.this, "downloading : " + progress, Toast.LENGTH_SHORT).show();
+                Log.i("onProgressUpdate:", "Downloading Stream: " + progress);
             }
 
             @Override
@@ -54,16 +55,62 @@ step 4: how to use
             public void onDownloaded(DownloadState downloadState) {
                 if (downloadState.isSuccessfully()) {
                     Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
+                }
+            }
+        });
+	
+	
+	/* this is sample of full download */
+	
+	//url of file
+        String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+
+        //direction of downloadedFile
+        String fileStorageDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hello_full_download.png";
+
+        //get instance of FileDownloader
+        fileDownloader = new FileDownloader(fileDownloadUrl, fileStorageDir);
+
+        //download file
+        fileDownloader.fullDownloadFile(new OnFileDownloadListener() {
+            @Override
+            public void onStart() {
+                Toast.makeText(MainActivity.this, "Download Started", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onProgressUpdate(int progress) {
+                Log.i("onProgressUpdate:", "Downloading full: " + progress);
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDownloaded(DownloadState downloadState) {
+                if (downloadState.isSuccessfully()) {
                     Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 	
-	//cancel download file
-        fileDownloader.cancelDownload(new OnFileDownloadCancelListener() {
-            @Override
-            public void onCancel() {
-
-            }
-        });
+	
+	 //cancel stream download file
+         fileDownloader.cancelStreamDownload(new OnFileDownloadCancelListener() {
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "Download Stream Canceled", Toast.LENGTH_SHORT).show();
+                }
+            });
+            
+ 	 //cancel full download file
+	 fileDownloader.cancelFullDownload(new OnFileDownloadCancelListener() {
+		@Override
+		public void onCancel() {
+		    Toast.makeText(MainActivity.this, "Download full Canceled", Toast.LENGTH_SHORT).show();
+		}
+	    });
+        
+	
