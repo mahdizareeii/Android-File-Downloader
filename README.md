@@ -1,5 +1,5 @@
 # File-Downloader
-[![](https://jitpack.io/v/mahdizareeii/File-Downloader.svg)](https://jitpack.io/#mahdizareeii/File-Downloader)
+[![](https://jitpack.io/v/mahdizareeii/Android-File-Downloader.svg)](https://jitpack.io/#mahdizareeii/Android-File-Downloader)
 
 step 1: add the following codes in 'build.gradle(Project: yourproject)'
 
@@ -13,7 +13,7 @@ step 1: add the following codes in 'build.gradle(Project: yourproject)'
 step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.4'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.5'
 	}
 
 step 3: add the permissions in your manifest
@@ -23,6 +23,7 @@ step 3: add the permissions in your manifest
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
 step 4: how to use
+
 	/* this is sample of streaming download */
 	
         //url of file
