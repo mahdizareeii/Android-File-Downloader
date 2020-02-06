@@ -103,11 +103,11 @@ step 4: how to use
             });
             
  	 //cancel full download file
-         fileDownloader.cancelFullDownload(new OnFileDownloadCancelListener() {
-                @Override
-                public void onCancel() {
-                    Toast.makeText(MainActivity.this, "Download full Canceled", Toast.LENGTH_SHORT).show();
-                }
-            });
+	fileDownloader.cancelFullDownload(new OnFileDownloadCancelListener() {
+		@Override
+		public void onCancel() {
+		    Toast.makeText(MainActivity.this, "Download full Canceled", Toast.LENGTH_SHORT).show();
+		}
+	    });
         
 	
