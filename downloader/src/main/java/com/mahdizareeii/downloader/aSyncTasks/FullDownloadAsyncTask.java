@@ -5,10 +5,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
+import com.mahdizareeii.downloader.interfaces.OnProgressListener;
+import com.mahdizareeii.downloader.util.CustomDataInputStream;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class FullDownloadAsyncTask extends AsyncTask<String, Integer, String> {
     }
 
     private String download(String fileUrl, String storageUrl) {
-        DataInputStream dataInputStream = null;
+        CustomDataInputStream dataInputStream = null;
         DataOutputStream dataOutputStream = null;
         URLConnection urlConnection = null;
 
@@ -47,10 +47,15 @@ public class FullDownloadAsyncTask extends AsyncTask<String, Integer, String> {
             urlConnection = url.openConnection();
             urlConnection.connect();
 
-            int fileLength = urlConnection.getContentLength();
+            final int fileLength = urlConnection.getContentLength();
             byte[] data = new byte[fileLength];
 
-            dataInputStream = new DataInputStream(url.openStream());
+            dataInputStream = new CustomDataInputStream(url.openStream(), new OnProgressListener() {
+                @Override
+                public void onProgress(int progress) {
+                    publishProgress((int) (progress * 100 / fileLength));
+                }
+            });
             dataInputStream.readFully(data);
             dataInputStream.close();
             if (!isCancelled()) {
@@ -58,7 +63,7 @@ public class FullDownloadAsyncTask extends AsyncTask<String, Integer, String> {
                 dataOutputStream.write(data);
                 dataOutputStream.flush();
                 dataOutputStream.close();
-                onFileDownloadListener.onDownloaded(new DownloadState(true, "Download Successful"));
+                return null;
             }
 
         } catch (MalformedURLException e) {
@@ -81,6 +86,7 @@ public class FullDownloadAsyncTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        onFileDownloadListener.onDownloaded();
     }
 
     private void onError(final String message) {

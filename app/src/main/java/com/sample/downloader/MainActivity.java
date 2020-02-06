@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.FileDownloader;
 import com.mahdizareeii.downloader.interfaces.OnFileDownloadCancelListener;
 import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
@@ -74,12 +73,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDownloaded(DownloadState downloadState) {
-                if (downloadState.isSuccessfully()) {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            public void onDownloaded() {
+                Toast.makeText(MainActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -112,12 +107,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDownloaded(DownloadState downloadState) {
-                if (downloadState.isSuccessfully()) {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            public void onDownloaded() {
+                Toast.makeText(MainActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
             }
         });
     }

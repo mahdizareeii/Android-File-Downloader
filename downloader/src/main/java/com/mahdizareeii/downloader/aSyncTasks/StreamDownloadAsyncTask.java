@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.mahdizareeii.downloader.DownloadState;
 import com.mahdizareeii.downloader.interfaces.OnFileDownloadListener;
 
 import java.io.FileOutputStream;
@@ -68,7 +67,7 @@ public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> 
 
                 outputStream.write(data, 0, count);
             }
-            onFileDownloadListener.onDownloaded(new DownloadState(true, "Download Successful"));
+            return null;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -105,6 +104,7 @@ public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        onFileDownloadListener.onDownloaded();
     }
 
     private void onError(final String message) {
