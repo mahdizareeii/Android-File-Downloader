@@ -13,7 +13,7 @@ step 1: add the following codes in 'build.gradle(Project: yourproject)'
 step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.5'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.7'
 	}
 
 step 3: add the permissions in your manifest
@@ -24,7 +24,7 @@ step 3: add the permissions in your manifest
     
 step 4: how to use
 
-	/* this is sample of streaming download */
+        /* this is sample of streaming download */
 	
         //url of file
         String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
@@ -53,17 +53,15 @@ step 4: how to use
             }
 
             @Override
-            public void onDownloaded(DownloadState downloadState) {
-                if (downloadState.isSuccessfully()) {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            public void onDownloaded() {
+                Toast.makeText(MainActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
             }
         });
 	
 	
-	/* this is sample of full download */
+        /* this is sample of full download */
 	
-	//url of file
+        //url of file
         String fileDownloadUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
 
         //direction of downloadedFile
@@ -90,16 +88,14 @@ step 4: how to use
             }
 
             @Override
-            public void onDownloaded(DownloadState downloadState) {
-                if (downloadState.isSuccessfully()) {
-                    Toast.makeText(MainActivity.this, downloadState.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            public void onDownloaded() {
+                Toast.makeText(MainActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
             }
         });
 	
 	
 	 //cancel stream download file
-         fileDownloader.cancelStreamDownload(new OnFileDownloadCancelListener() {
+	 fileDownloader.cancelStreamDownload(new OnFileDownloadCancelListener() {
                 @Override
                 public void onCancel() {
                     Toast.makeText(MainActivity.this, "Download Stream Canceled", Toast.LENGTH_SHORT).show();
