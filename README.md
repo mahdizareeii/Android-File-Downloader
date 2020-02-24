@@ -13,7 +13,7 @@ step 1: add the following codes in 'build.gradle(Project: yourproject)'
 step 2: add the following codes in 'build.gradle(Madule: app)'
 
 	dependencies {
-	        implementation 'com.github.mahdizareeii:File-Downloader:1.6'
+	        implementation 'com.github.mahdizareeii:File-Downloader:1.7'
 	}
 
 step 3: add the permissions in your manifest
