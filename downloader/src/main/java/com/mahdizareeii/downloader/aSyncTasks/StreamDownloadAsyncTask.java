@@ -75,6 +75,9 @@ public class StreamDownloadAsyncTask extends AsyncTask<String, Integer, String> 
         } catch (IOException e) {
             e.printStackTrace();
             onError(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            onError(e.getMessage());
         } finally {
             try {
                 if (inputStream != null)

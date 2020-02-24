@@ -72,6 +72,21 @@ public class FullDownloadAsyncTask extends AsyncTask<String, Integer, String> {
         } catch (IOException e) {
             e.printStackTrace();
             onError(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            onError(e.getMessage());
+        } finally {
+            try {
+                if (dataInputStream != null)
+                    dataInputStream.close();
+
+                if (dataOutputStream != null)
+                    dataOutputStream.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                onError(e.getMessage());
+            }
         }
         return null;
     }
